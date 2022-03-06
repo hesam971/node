@@ -1,0 +1,83 @@
+<%- include ('Header') %>
+
+    <% if(resu != 'undefined'){ %>
+        <% resu.forEach(function(result){ %>
+            <div class="col-sm-9 p-3" style="margin-left: 20px;">
+                    <h3> <%= result.title %> </h3>
+                <h5>
+                    <%= result.subtitle %>
+                </h5>
+                <h6>
+                    Posted by <%= result.author %>
+                </h6>
+            </div>
+            <div class="col-11 p-3" style="margin-left: 20px;">
+                <p>
+                    <%= result.body %>.
+                </p>
+            </div>
+
+
+            <div class="col-10" style="margin-left: 20px;">
+                <h4>
+                    Add Comments
+                </h4>
+            </div>
+
+            <div class="container">
+                <form action="/blog-add-comment/<%= result.id %>" method="POST" class="row g-3" style="margin-left: -80px;">
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label"><h6> Subject </h6></label>
+                        <input type="text" class="form-control" name="subject" id="inputAddress" placeholder="Subject">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress2" class="form-label"><h6> Name </h6></label>
+                        <input type="text" class="form-control" name="name" id="inputAddress2" placeholder="Name">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label"><h6> Email </h6></label>
+                        <input type="email" class="form-control" name="email" placeholder="Email">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label"> Body </label>
+                        <textarea class="form-control" rows="3" name="body" placeholder="max 250 words"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary"> Add Comments </button>
+                    </div>
+            </form>
+        <% }) %>
+    <% } %>
+
+            <% if(menu != 'undefined'){ %>
+                <% menu.forEach(function(results){ %>
+                    <div class="col-12 p-3 border" style="margin-top: 20px; margin-left: -75px; margin-bottom: 25px;">
+                        <h5>
+                            psted by <%= results.name %>
+                        </h5>
+                        <h6>
+                            <%= results.body %>
+                        </h6>
+                    </div>
+                    
+                <% }) %>
+            <% } %>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+        $('.navbar-light .dmenu').hover(function () {
+                $(this).find('.sm-menu').first().stop(true, true).slideDown(150);
+            }, function () {
+                $(this).find('.sm-menu').first().stop(true, true).slideUp(105)
+            });
+        });
+        </script>
+</body>
+</html>

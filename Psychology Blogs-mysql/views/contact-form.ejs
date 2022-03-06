@@ -1,0 +1,67 @@
+    <%- include ('Header') %>
+
+
+    <section class="contact py-5 bg-light" id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Get in touch</h4>
+                <hr>
+            </div>
+            <div class="col-md-6">
+                <div class="address">
+                    
+                <h5>Address:</h5>
+                <ul class="list-unstyled">
+                    <li> T-Mobile Customer Relations</li>
+                    <li> PO Box 37380</li>
+                    <li> Essen </li>
+                </ul>
+                <p>Please don't send anything to this address.</p>
+                </div>
+                <div class="email">
+                <h5>Email:</h5>
+                <ul class="list-unstyled">
+                    <li> info@email.com</li>
+                </ul>
+                </div>
+                <div class="phone">
+                    <h5>Phone:</h5>
+                    <ul class="list-unstyled">
+                    <li> +91- 8800XXXXXX34</li>
+                </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="POST" action="/contact">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                <input id="Full Name" name="fullName" placeholder="Full Name" class="form-control" type="text">
+                                </div>
+                                <div class="form-group col-md-6">
+                                <input type="email" class="form-control" name="email" id="inputEmail4" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <input id="Mobile No." name="mobileNo" placeholder="Mobile No." class="form-control" required="required" type="text">
+                                </div>
+                                <div class="form-group col-md-12">
+                                        <textarea id="comment" name="comment" cols="40" rows="5" placeholder="Your Message"class="form-control"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <button type="submit" class="btn btn-danger">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    </section>
