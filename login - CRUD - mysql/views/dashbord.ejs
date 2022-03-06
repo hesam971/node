@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    
+    <title>Dashbord</title>
+</head>
+<body>
+    
+    <nav class="navbar navbar-default mq-navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+                </button>
+            </div>
+            <div class="navbar-header collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+                    <li class="dropdown">
+                        <a href="/login" data-toggle="dropdown"> Logout </a>
+                        <ul class="dropdown-menu mq-dropdown">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">About</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <form action="/post" method="POST">
+                    <div class="row mb-3">
+                    <label for="Firstname" class="col-sm-2 col-form-label">Firstname</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="Firstname" name="Firstname">
+                    </div>
+                    </div>
+                    <div class="row mb-3">
+                    <label for="Lastname" class="col-sm-2 col-form-label">lastname</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="Lastname" name="Lastname">
+                    </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Email" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="Email" name="Email">
+                        </div>
+                        </div>
+                    <button type="submit" class="btn btn-primary"> Add to list </button>
+                </form>
+                <br/><br/>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nummber</th>
+                        <th scope="col">Firstname</th>
+                        <th scope="col">Lastname</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Delete/Edit</th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% if(data != 'undefined'){ %>
+                            <% data.forEach(function(results){ %>
+                            <tr>
+                                <th scope="row"> <%= results.id %> </th>
+                                <td> <%= results.firstname %> </td>
+                                <td> <%= results.lastname %> </td>
+                                <td> <%= results.email %> </td>
+                                <td>
+                                    <a data-delete="<%= results.id %>" class="btn btn-danger delete"> Delete </a>
+                                    <a href="/edit-dashbord/<%= results.id %>" class="btn btn-warning"> Edit </a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        <% } %>
+                    </tbody>
+                </table>
+        </div>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+
+        $(document).ready(function(){
+            $('.delete').click(function(e){
+                const deletes = $(e.target);
+                const deletesId = deletes.attr('data-delete');
+                $.ajax({
+                    url:'/delete/' + deletesId,
+                    method:'DELETE',
+                    success:function(response){
+                        window.location.href = '/dashbord';
+                    }
+                })
+            })
+        });
+
+    </script>
+</body>
+</html>

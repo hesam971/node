@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Login</title>
+</head>
+<body>
+    
+<div class="container">
+    <div id="loginbox" style="margin-top: 50px;" class="mainbox col-lg-6 offset-md-3 col-md-8 offset-sm-2">
+        <div class="card card-inverse card-info">
+            <div class="card-header">
+                <div class="card-title">Login</div>
+                <div style="float: right; font-size: 80%; position: relative; top: -10px;">
+                </div>
+            </div>
+            <div style="padding-top: 30px;" class="card-block">
+                <div style="display: none;" id="login-alert" class="alert alert-danger col-md-12"></div>
+                <form action="/dashbord" method="POST">
+                    
+                    <% if(typeof error != 'undefined'){ %>
+                        <% error.forEach(function(err){ %>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <%= err.msg %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <% }) %>
+                    <% } %>
+
+                    <div style="margin-bottom: 25px;" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="login-username" type="email" class="form-control" name="email" value="<% typeof email != 'undefined'? email: ''%>" placeholder="email"/>
+                    </div>
+                    <div style="margin-bottom: 25px;" class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input id="login-password" type="password" class="form-control" name="password" value="<% typeof password != 'undefined'? password: ''%>" placeholder="password" />
+                    </div>
+                    <div style="margin-top: 10px;" class="form-group">
+                        <!-- Button -->
+                        <div class="col-md-12 controls"> <button type="submit" class="btn btn-success"> Login</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12 control">
+                            <div style="padding-top: 15px; font-size: 85%;">Don't have an account! <a href="/">Sign Up Here </a>   
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="signupbox" style="display: none; margin-top: 50px;" class="mainbox col-lg-6 offset-md-3 col-md-8 offset-sm-2">
+        <div class="card card-inverse card-info">
+            <div class="card-header">
+                <div class="card-title">Sign Up</div>
+                <div style="float: right; font-size: 85%; position: relative; top: -10px;"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a>
+                </div>
+            </div>
+        </div>
+	</div>
+	</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</body>
+</html>

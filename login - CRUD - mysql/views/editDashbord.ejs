@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    
+    <title>Dashbord</title>
+</head>
+<body>
+    
+    <nav class="navbar navbar-default mq-navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+                </button>
+            </div>
+            <div class="navbar-header collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+                    <li class="dropdown">
+                        <a href="/login" data-toggle="dropdown"> Logout </a>
+                        <ul class="dropdown-menu mq-dropdown">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">About</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <% if(data != 'undefined'){ %>
+                <% data.forEach(function(result){ %>
+                    <form action="/update/<%=result.id%>" method="POST">
+                        <div class="row mb-3">
+                        <label for="Firstname" class="col-sm-2 col-form-label">Firstname</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="Firstname" name="Firstname" value="<%=result.firstname%>">
+                        </div>
+                        </div>
+                        <div class="row mb-3">
+                        <label for="Lastname" class="col-sm-2 col-form-label">lastname</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="Lastname" name="Lastname" value="<%=result.lastname%>">
+                        </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="Email" class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="Email" name="Email" value="<%=result.email%>">
+                            </div>
+                            </div>
+                        <button type="submit" class="btn btn-primary"> Add to list </button>
+                    </form>
+                <% }) %>
+            <% } %>
+        </div>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</body>
+</html>
