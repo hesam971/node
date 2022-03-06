@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container col-6">
+        <h1 class="container col-6"> this is CRUD list </h1>
+        <form>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">firstname</label>
+                <div class="col-sm-10">
+                    <input id="username" type="text" class="form-control" name="username">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">lastname</label>
+                <div class="col-sm-10">
+                    <input id="lastname" type="text" class="form-control" name="lastname">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">email</label>
+                <div class="col-sm-10">
+                    <input id="email" type="email" class="form-control" name="email">
+                </div>
+            </div>
+            <button id="add" type="submit" class="btn btn-primary">add to list</button>
+        </form>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Firstname</th>
+                            <th scope="col">Lastname</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Edit\Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(result) { %>
+                            <% result.forEach(function(user){ %>
+                        <tr>
+                            <th scope="col"><%= user.id %></th>
+                            <td><%= user.username %></td>
+                            <td><%= user.lastname %></td>
+                            <td><%= user.email %></td>
+                            <td>
+                                <a href="" class="btn btn-warning" style="margin-right:2px;"> Edit </a>
+                                <a class="btn btn-danger delete" data-id="<%= user.id %>" style="margin-left: 2px;"> Delete </a>
+                            </td>
+                        </tr>
+                            <%}) %>
+                        <% } %>
+                    </tbody>
+                    </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+    
+    $(document).ready(
+        // post config
+        $('#add').click(function(e){
+            e.preventDefault();
+            const username = $('#username').val();
+            const lastname = $('#lastname').val();
+            const email = $('#email').val();
+            console.log(email);
+            $.ajax({
+                url:'/post',
+                contentType:'application/json',
+                method:'POST',
+                data:JSON.stringify({username,lastname,email}),
+                success:function(response){
+                    const newOne = ` <th scope="row">1</th>
+                    <td> ${username} </td>
+                            <td> ${lastname} </td>
+                            <td> ${email} </td>
+                            <td>
+                                <a href="" class="btn btn-warning" style="margin-right:2px;"> Edit </a>
+                                <a href="" class="btn btn-danger" style="margin-left: 2px;"> Delete </a>
+                            </td>`
+                    $('tbody').append(newOne);
+                }
+            })
+        }),
+
+        // delete config
+        $('.delete').click(function(e){
+            const id_ = $(e.target);
+            const id_delete = id_.attr('data-id');
+            $.ajax({
+                url:'/delete/' + id_delete,
+                method:'DELETE',
+                success:function(response){
+                    window.location.href = '/';
+                }
+            })
+        })
+    );
+
+</script>
+</body>
+</html>
