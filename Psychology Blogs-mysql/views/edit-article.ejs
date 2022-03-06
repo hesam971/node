@@ -1,0 +1,75 @@
+<%- include ('Header') %>
+            <div class="col-10" style="margin-left: 20px; margin-top: 20px;">
+                <h4>
+                    Edit Articles
+                </h4>
+            </div>
+
+            <% if(typeof error != 'undefined'){ %>
+                <div class="col-sm-11 p-3">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <%= error %> 
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            <% } %>
+
+            <div class="container" style="margin-bottom: 20px;">
+                <% if(resu != 'undefined'){ %>
+                    <% resu.forEach(function(results){ %>
+                        <form action="/update-article/<%= results.id %>" method="POST" class="row g-3" style="margin-left: -80px;">
+                            <div class="col-12">
+                                <label for="inputAddress" class="form-label"><h6> Title </h6></label>
+                                <input type="text" class="form-control" value="<%= results.title %>" name="title" id="inputAddress" placeholder="Title">
+                            </div>
+                            <div class="col-12">
+                                <label for="inputAddress2" class="form-label"><h6> Subtitle </h6></label>
+                                <input type="text" class="form-control" value="<%= results.subtitle %>" name="subtitle" id="inputAddress2" placeholder="Subtitle">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label"><h6> Catagory </h6></label>
+                                <select class="form-select" aria-label="Default select example" name="catagory">
+                                    
+                                    <% if(menu != 'undefined'){ %>
+                                        <% menu.forEach(function(result){ %>
+                                            <% if(results.catagory == result.title){ %>
+                                                <option value="<%=result.id %>"> <%=results.catagory %> </option>
+                                            <% } %>
+                                        <% }) %>
+                                    <% } %>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label"><h6> Author </h6></label>
+                                <input type="text" class="form-control" value="<%= results.author %>" name="author" placeholder="Author">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label"> Body </label>
+                                <textarea class="form-control" name="body" rows="3"> <%= results.body %> </textarea>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary"> Save </button>
+                                <a href="/articles" class="btn btn-danger"> Back </a>
+                            </div>
+                        <% }) %>
+                    <% } %>
+            </form>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+        $('.navbar-light .dmenu').hover(function () {
+                $(this).find('.sm-menu').first().stop(true, true).slideDown(150);
+            }, function () {
+                $(this).find('.sm-menu').first().stop(true, true).slideUp(105)
+            });
+        });
+        </script>
+</body>
+</html>
